@@ -1,0 +1,413 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    END_CRAFTY_DATA
+    END_CRAFTY_START
+    NOT
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> data
+Rule 2     program -> code
+Rule 3     data -> CRAFTY_DATA declaracion
+Rule 4     declaracion -> IDENTIFICADOR ASIGNAR ENTERO
+Rule 5     declaracion -> IDENTIFICADOR ASIGNAR CADENA
+Rule 6     declaracion -> expresion
+Rule 7     expresion -> ENTERO
+Rule 8     expresion -> CADENA
+Rule 9     expresion -> expresion op_a expresion
+Rule 10    expresion -> PARIZQ expresion PARDER
+Rule 11    op_a -> SUMA
+Rule 12    op_a -> RESTA
+Rule 13    op_a -> MULT
+Rule 14    op_a -> DIV
+Rule 15    code -> CRAFTY_START
+Rule 16    bloque -> elements PARIZQ START PARDER DOSPUNTOS
+Rule 17    bloque -> elements PARIZQ STOP PARDER DOSPUNTOS
+Rule 18    elements -> CRAFTY_LIGHT
+Rule 19    elements -> CRAFTY_WATER
+Rule 20    elements -> CRAFTY_WARM
+Rule 21    elements -> CRAFTY_AIR
+Rule 22    cuerpo -> sent
+Rule 23    cuerpo -> sentencias
+Rule 24    sentencias -> sent
+Rule 25    sent -> declaracion
+Rule 26    sent -> bloque
+Rule 27    sent -> ciclos
+Rule 28    sent -> establecer
+Rule 29    establecer -> IDENTIFICADOR SET_ listaset
+Rule 30    establecer -> IDENTIFICADOR SET_ DELAY ENTERO
+Rule 31    establecer -> IDENTIFICADOR SET_ LIGHT_BLINK ENTERO
+Rule 32    listaset -> AIR_DOWN
+Rule 33    listaset -> AIR_UP
+Rule 34    listaset -> LIGHT_DOWN
+Rule 35    listaset -> LIGHT_UP
+Rule 36    listaset -> WARM_DOWN
+Rule 37    listaset -> WARM_UP
+Rule 38    listaset -> WATER_DOWN
+Rule 39    listaset -> WATER_UP
+Rule 40    listaset -> TRUE
+Rule 41    listaset -> FALSE
+Rule 42    ciclos -> cicloif
+Rule 43    ciclos -> ciclofor
+Rule 44    ciclos -> ciclowhile
+Rule 45    cicloif -> IF PARIZQ cond PARDER DOSPUNTOS cuerpo
+Rule 46    cicloif -> IF PARIZQ cond PARDER DOSPUNTOS cuerpo ELSE DOSPUNTOS cuerpo
+Rule 47    cond -> DISTINTO cond
+Rule 48    cond -> cond op_log cond
+Rule 49    cond -> expresion op_rel expresion
+Rule 50    op_log -> AND
+Rule 51    op_log -> OR
+Rule 52    op_rel -> MAYORQUE
+Rule 53    op_rel -> MENORQUE
+Rule 54    op_rel -> MAYORIGUAL
+Rule 55    op_rel -> MENORIGUAL
+Rule 56    op_rel -> IGUAL
+Rule 57    op_rel -> DISTINTO
+Rule 58    ciclofor -> FOR PARIZQ cond PARDER DOSPUNTOS cuerpo
+Rule 59    ciclowhile -> WHILE PARIZQ cond PARDER DOSPUNTOS cuerpo
+
+Terminals, with rules where they appear
+
+AIR_DOWN             : 32
+AIR_UP               : 33
+AND                  : 50
+ASIGNAR              : 4 5
+CADENA               : 5 8
+CRAFTY_AIR           : 21
+CRAFTY_DATA          : 3
+CRAFTY_LIGHT         : 18
+CRAFTY_START         : 15
+CRAFTY_WARM          : 20
+CRAFTY_WATER         : 19
+DELAY                : 30
+DISTINTO             : 47 57
+DIV                  : 14
+DOSPUNTOS            : 16 17 45 46 46 58 59
+ELSE                 : 46
+END_CRAFTY_DATA      : 
+END_CRAFTY_START     : 
+ENTERO               : 4 7 30 31
+FALSE                : 41
+FOR                  : 58
+IDENTIFICADOR        : 4 5 29 30 31
+IF                   : 45 46
+IGUAL                : 56
+LIGHT_BLINK          : 31
+LIGHT_DOWN           : 34
+LIGHT_UP             : 35
+MAYORIGUAL           : 54
+MAYORQUE             : 52
+MENORIGUAL           : 55
+MENORQUE             : 53
+MULT                 : 13
+NOT                  : 
+OR                   : 51
+PARDER               : 10 16 17 45 46 58 59
+PARIZQ               : 10 16 17 45 46 58 59
+RESTA                : 12
+SET_                 : 29 30 31
+START                : 16
+STOP                 : 17
+SUMA                 : 11
+TRUE                 : 40
+WARM_DOWN            : 36
+WARM_UP              : 37
+WATER_DOWN           : 38
+WATER_UP             : 39
+WHILE                : 59
+error                : 
+
+Nonterminals, with rules where they appear
+
+bloque               : 26
+ciclofor             : 43
+cicloif              : 42
+ciclos               : 27
+ciclowhile           : 44
+code                 : 2
+cond                 : 45 46 47 48 48 58 59
+cuerpo               : 45 46 46 58 59
+data                 : 1
+declaracion          : 3 25
+elements             : 16 17
+establecer           : 28
+expresion            : 6 9 9 10 49 49
+listaset             : 29
+op_a                 : 9
+op_log               : 48
+op_rel               : 49
+program              : 0
+sent                 : 22 24
+sentencias           : 23
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . data
+    (2) program -> . code
+    (3) data -> . CRAFTY_DATA declaracion
+    (15) code -> . CRAFTY_START
+
+    CRAFTY_DATA     shift and go to state 4
+    CRAFTY_START    shift and go to state 5
+
+    program                        shift and go to state 1
+    data                           shift and go to state 2
+    code                           shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> data .
+
+    $end            reduce using rule 1 (program -> data .)
+
+
+state 3
+
+    (2) program -> code .
+
+    $end            reduce using rule 2 (program -> code .)
+
+
+state 4
+
+    (3) data -> CRAFTY_DATA . declaracion
+    (4) declaracion -> . IDENTIFICADOR ASIGNAR ENTERO
+    (5) declaracion -> . IDENTIFICADOR ASIGNAR CADENA
+    (6) declaracion -> . expresion
+    (7) expresion -> . ENTERO
+    (8) expresion -> . CADENA
+    (9) expresion -> . expresion op_a expresion
+    (10) expresion -> . PARIZQ expresion PARDER
+
+    IDENTIFICADOR   shift and go to state 7
+    ENTERO          shift and go to state 8
+    CADENA          shift and go to state 9
+    PARIZQ          shift and go to state 11
+
+    declaracion                    shift and go to state 6
+    expresion                      shift and go to state 10
+
+state 5
+
+    (15) code -> CRAFTY_START .
+
+    $end            reduce using rule 15 (code -> CRAFTY_START .)
+
+
+state 6
+
+    (3) data -> CRAFTY_DATA declaracion .
+
+    $end            reduce using rule 3 (data -> CRAFTY_DATA declaracion .)
+
+
+state 7
+
+    (4) declaracion -> IDENTIFICADOR . ASIGNAR ENTERO
+    (5) declaracion -> IDENTIFICADOR . ASIGNAR CADENA
+
+    ASIGNAR         shift and go to state 12
+
+
+state 8
+
+    (7) expresion -> ENTERO .
+
+    SUMA            reduce using rule 7 (expresion -> ENTERO .)
+    RESTA           reduce using rule 7 (expresion -> ENTERO .)
+    MULT            reduce using rule 7 (expresion -> ENTERO .)
+    DIV             reduce using rule 7 (expresion -> ENTERO .)
+    $end            reduce using rule 7 (expresion -> ENTERO .)
+    PARDER          reduce using rule 7 (expresion -> ENTERO .)
+
+
+state 9
+
+    (8) expresion -> CADENA .
+
+    SUMA            reduce using rule 8 (expresion -> CADENA .)
+    RESTA           reduce using rule 8 (expresion -> CADENA .)
+    MULT            reduce using rule 8 (expresion -> CADENA .)
+    DIV             reduce using rule 8 (expresion -> CADENA .)
+    $end            reduce using rule 8 (expresion -> CADENA .)
+    PARDER          reduce using rule 8 (expresion -> CADENA .)
+
+
+state 10
+
+    (6) declaracion -> expresion .
+    (9) expresion -> expresion . op_a expresion
+    (11) op_a -> . SUMA
+    (12) op_a -> . RESTA
+    (13) op_a -> . MULT
+    (14) op_a -> . DIV
+
+    $end            reduce using rule 6 (declaracion -> expresion .)
+    SUMA            shift and go to state 14
+    RESTA           shift and go to state 15
+    MULT            shift and go to state 16
+    DIV             shift and go to state 17
+
+    op_a                           shift and go to state 13
+
+state 11
+
+    (10) expresion -> PARIZQ . expresion PARDER
+    (7) expresion -> . ENTERO
+    (8) expresion -> . CADENA
+    (9) expresion -> . expresion op_a expresion
+    (10) expresion -> . PARIZQ expresion PARDER
+
+    ENTERO          shift and go to state 8
+    CADENA          shift and go to state 9
+    PARIZQ          shift and go to state 11
+
+    expresion                      shift and go to state 18
+
+state 12
+
+    (4) declaracion -> IDENTIFICADOR ASIGNAR . ENTERO
+    (5) declaracion -> IDENTIFICADOR ASIGNAR . CADENA
+
+    ENTERO          shift and go to state 19
+    CADENA          shift and go to state 20
+
+
+state 13
+
+    (9) expresion -> expresion op_a . expresion
+    (7) expresion -> . ENTERO
+    (8) expresion -> . CADENA
+    (9) expresion -> . expresion op_a expresion
+    (10) expresion -> . PARIZQ expresion PARDER
+
+    ENTERO          shift and go to state 8
+    CADENA          shift and go to state 9
+    PARIZQ          shift and go to state 11
+
+    expresion                      shift and go to state 21
+
+state 14
+
+    (11) op_a -> SUMA .
+
+    ENTERO          reduce using rule 11 (op_a -> SUMA .)
+    CADENA          reduce using rule 11 (op_a -> SUMA .)
+    PARIZQ          reduce using rule 11 (op_a -> SUMA .)
+
+
+state 15
+
+    (12) op_a -> RESTA .
+
+    ENTERO          reduce using rule 12 (op_a -> RESTA .)
+    CADENA          reduce using rule 12 (op_a -> RESTA .)
+    PARIZQ          reduce using rule 12 (op_a -> RESTA .)
+
+
+state 16
+
+    (13) op_a -> MULT .
+
+    ENTERO          reduce using rule 13 (op_a -> MULT .)
+    CADENA          reduce using rule 13 (op_a -> MULT .)
+    PARIZQ          reduce using rule 13 (op_a -> MULT .)
+
+
+state 17
+
+    (14) op_a -> DIV .
+
+    ENTERO          reduce using rule 14 (op_a -> DIV .)
+    CADENA          reduce using rule 14 (op_a -> DIV .)
+    PARIZQ          reduce using rule 14 (op_a -> DIV .)
+
+
+state 18
+
+    (10) expresion -> PARIZQ expresion . PARDER
+    (9) expresion -> expresion . op_a expresion
+    (11) op_a -> . SUMA
+    (12) op_a -> . RESTA
+    (13) op_a -> . MULT
+    (14) op_a -> . DIV
+
+    PARDER          shift and go to state 22
+    SUMA            shift and go to state 14
+    RESTA           shift and go to state 15
+    MULT            shift and go to state 16
+    DIV             shift and go to state 17
+
+    op_a                           shift and go to state 13
+
+state 19
+
+    (4) declaracion -> IDENTIFICADOR ASIGNAR ENTERO .
+
+    $end            reduce using rule 4 (declaracion -> IDENTIFICADOR ASIGNAR ENTERO .)
+
+
+state 20
+
+    (5) declaracion -> IDENTIFICADOR ASIGNAR CADENA .
+
+    $end            reduce using rule 5 (declaracion -> IDENTIFICADOR ASIGNAR CADENA .)
+
+
+state 21
+
+    (9) expresion -> expresion op_a expresion .
+    (9) expresion -> expresion . op_a expresion
+    (11) op_a -> . SUMA
+    (12) op_a -> . RESTA
+    (13) op_a -> . MULT
+    (14) op_a -> . DIV
+
+  ! shift/reduce conflict for SUMA resolved as shift
+  ! shift/reduce conflict for RESTA resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    $end            reduce using rule 9 (expresion -> expresion op_a expresion .)
+    PARDER          reduce using rule 9 (expresion -> expresion op_a expresion .)
+    SUMA            shift and go to state 14
+    RESTA           shift and go to state 15
+    MULT            shift and go to state 16
+    DIV             shift and go to state 17
+
+  ! SUMA            [ reduce using rule 9 (expresion -> expresion op_a expresion .) ]
+  ! RESTA           [ reduce using rule 9 (expresion -> expresion op_a expresion .) ]
+  ! MULT            [ reduce using rule 9 (expresion -> expresion op_a expresion .) ]
+  ! DIV             [ reduce using rule 9 (expresion -> expresion op_a expresion .) ]
+
+    op_a                           shift and go to state 13
+
+state 22
+
+    (10) expresion -> PARIZQ expresion PARDER .
+
+    SUMA            reduce using rule 10 (expresion -> PARIZQ expresion PARDER .)
+    RESTA           reduce using rule 10 (expresion -> PARIZQ expresion PARDER .)
+    MULT            reduce using rule 10 (expresion -> PARIZQ expresion PARDER .)
+    DIV             reduce using rule 10 (expresion -> PARIZQ expresion PARDER .)
+    $end            reduce using rule 10 (expresion -> PARIZQ expresion PARDER .)
+    PARDER          reduce using rule 10 (expresion -> PARIZQ expresion PARDER .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SUMA in state 21 resolved as shift
+WARNING: shift/reduce conflict for RESTA in state 21 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 21 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 21 resolved as shift
